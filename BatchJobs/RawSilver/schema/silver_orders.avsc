@@ -1,0 +1,52 @@
+{
+  "type": "record",
+  "name": "InvoiceRecord",
+  "fields": [
+    {
+      "name": "invoiceid",
+      "type": "int",
+      "default": 0
+    },
+    {
+      "name": "itemid",
+      "type": "int",
+      "default": 0
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "price",
+      "type": "float",
+      "default": 0.0
+    },
+    {
+      "name": "quantity",
+      "type": "int",
+      "default": 1
+    },
+    {
+      "name": "orderdate",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "destinationstate",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "shippingtype",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "referral",
+      "type": "string",
+      "default": ""
+    }
+
+  ]
+}

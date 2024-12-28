@@ -1,0 +1,28 @@
+
+
+export AWS_ACCESS_KEY_ID="XX"
+export AWS_SECRET_ACCESS_KEY="XX"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@11"
+pip3 install pyspark==3.4.0
+
+
+
+# INserts
+aws s3 cp /Users/soumilshah/IdeaProjects/emr-labs/e6data/raw/datafiles/initialsinserts/e37d8fae-51e2-4716-bfb1-7381d7e58bcf.csv  s3://soumil-dev-bucket-1995/raw/e37d8fae-51e2-4716-bfb1-7381d7e58bcf.csv
+
+# Updates
+aws s3 cp /Users/soumilshah/IdeaProjects/emr-labs/e6data/raw/datafiles/updates/6a45a9d1-9ef4-4df1-99d6-2d1add3b2e94.csv  s3://soumil-dev-bucket-1995/raw/6a45a9d1-9ef4-4df1-99d6-2d1add3b2e94.csv
+
+----------------
+Run Pipeline
+---------------
+python3 Template.py /Users/soumilshah/IdeaProjects/emr-labs/e6data/scripts/BatchJobs/RawSilver/JsonFiles/RawToSilver.json
+
+
+----------------
+Cleanup
+---------------
+
+aws s3tables delete-table \
+--table-bucket-arn XXX \
+--namespace example_namespace --name orders --region us-east-1

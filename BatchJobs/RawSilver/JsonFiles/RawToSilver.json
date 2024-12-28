@@ -1,0 +1,41 @@
+{
+  "spark": {
+    "spark.app.name": "iceberg_lab",
+    "spark.jars.packages": "com.amazonaws:aws-java-sdk-bundle:1.12.661,org.apache.hadoop:hadoop-aws:3.3.4,software.amazon.awssdk:bundle:2.29.38,com.github.ben-manes.caffeine:caffeine:3.1.8,org.apache.commons:commons-configuration2:2.11.0,software.amazon.s3tables:s3-tables-catalog-for-iceberg:0.1.3,org.apache.iceberg:iceberg-spark-runtime-3.4_2.12:1.6.1",
+    "spark.sql.extensions": "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions",
+    "spark.sql.catalog.defaultCatalog": "s3tablesbucket",
+    "spark.sql.catalog.s3tablesbucket": "org.apache.iceberg.spark.SparkCatalog",
+    "spark.sql.catalog.s3tablesbucket.catalog-impl": "software.amazon.s3tables.iceberg.S3TablesCatalog",
+    "spark.sql.catalog.s3tablesbucket.warehouse": "XXXXXX",
+    "spark.sql.catalog.s3tablesbucket.client.region": "us-east-1",
+    "spark.sql.catalog.dev.s3.endpoint": "https://s3.amazonaws.com",
+    "spark.hadoop.fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
+    "spark.hadoop.fs.s3a.aws.credentials.provider": "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
+  },
+  "input_config": {
+    "protocol": "s3a",
+    "commit_checkpoint": true,
+    "path": "s3a://<BUCKET>/raw/",
+    "type": "csv",
+    "transform_query": "",
+    "mode": "inc",
+    "checkpoint_path": "s3a://<BUCKET>/checkpoint/orders.json",
+    "csv_options": {
+      "sep": "\t",
+      "header": "true",
+      "inferSchema": "true"
+    }
+  },
+  "output_config": {
+    "catalog_name": "s3tablesbucket",
+    "database": "example_namespace",
+    "table_name": "orders",
+    "type": "table_buckets",
+    "mode": "merge",
+    "schema": "/Users/soumilshah/IdeaProjects/emr-labs/e6data/scripts/BatchJobs/RawSilver/schema/silver_orders.avsc",
+    "merge_query": "/Users/soumilshah/IdeaProjects/emr-labs/e6data/scripts/BatchJobs/RawSilver/SQL/RawToSilverMergeSql.sql",
+    "table_type": "COW",
+    "compression": "zstd",
+    "partition": "destinationstate"
+  }
+}
